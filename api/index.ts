@@ -1,13 +1,14 @@
 const express = require("express");
 const axios = require("axios");
 const fs = require("node:fs");
+import { put } from "@vercel/blob";
 const app = express();
 
 // app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.get("/", async (req, res) => {
   const payload = {
-    prompt: "cat who is fan of music dressed in shirt of Ariana Grande and has posters of Taylor Swift in his room",
+    prompt: "cat who is fan of music dressed in shirt of 21 Savage and has posters of Taylor Swift in his room",
     output_format: "webp",
   };
 
@@ -25,8 +26,10 @@ app.get("/", async (req, res) => {
   );
 
   if (response.status === 200) {
-    fs.writeFileSync("./lighthouse.webp", Buffer.from(response.data));
-    res.send("Express on Vercel")
+    
+    // fs.writeFileSync("./public/new-image.webp", Buffer.from(response.data));
+    const { url } = await put('test.webp', Buffer.from(response.data), { access: 'public' });
+    res.send(`Express on Vercel = ${url}`)
   } else {
     throw new Error(`${response.status}: ${response.data.toString()}`);
   }
