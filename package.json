@@ -12,7 +12,8 @@
   "dependencies": {
     "@vercel/blob": "^0.23.3",
     "axios": "^1.7.2",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "openai": "^4.51.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.2"
